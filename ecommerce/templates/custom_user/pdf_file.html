@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}PDF File{% endblock %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <hr><h3>Order Detail</h3><hr>
+            <p>Order ID: ORDER_{{ order.id }}</p>
+            <p>Order Status: {{ order.order_status }}</p>
+            <p>Order On: {{ order.created_at }}</p>
+            <p>Customer Information: {{ order.ordered_by }}</p>
+            <p>Phone: {{ order.phone }}</p>
+            <p>Email: {{ order.email }}</p>
+            <p>Shipping Address: {{ order.shipping_address }}</p>
+
+            <hr><h4 style="margin-top: 20px;">Ordered Items</h4><hr>
+            <table class="table" style="text-align: center;">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Item</th>
+                        <th>Rate</th>
+                        <th>Quantity</th>
+                        <th>Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cart_product in cart_products %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ cart_product.product.title }}</td>
+                        <td>{{ cart_product.rate }}</td>
+                        <td>{{ cart_product.quantity }}</td>
+                        <td>{{ cart_product.subtotal }}</td>
+                    {% endfor %}
+                    <tr>
+                        <th colspan="4" class="text-right">Total: </th>
+                        <td>{{ order.total }}$</td>
+                    </tr>
+                </tbody>
+            </table><hr>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+</body>
+
+</html>

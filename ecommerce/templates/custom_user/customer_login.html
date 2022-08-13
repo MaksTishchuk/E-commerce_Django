@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}Customer Login{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <h3>Customer Login Form</h3>
+            <hr>
+            <form action="" method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                {% if error %}
+                    <li style="color: red; margin-bottom: 10px;">{{ error }}</li>
+                {% endif %}
+                <button class="btn btn-primary">Login as a Customer</button>
+            </form>
+            <p>Forgot Password? <a href="{% url 'customer-forgot-password' %}">Reset now</a></p>
+            <p> or don`t have account?
+              <a href="{% url 'customer-registration' %}">
+                  Register here
+              </a>
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

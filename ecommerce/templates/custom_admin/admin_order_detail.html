@@ -1,0 +1,61 @@
+{% extends "custom_admin/admin_base.html" %}
+
+{% block title %}Order Detail{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <h3>Order Detail</h3>
+            <hr>
+            <a class="btn btn-primary" style="margin-bottom: 10px;" target="_blank" href="{% url 'customer-make-pdf' order.id %}">Load Order PDF</a>
+            <p><span class="font-weight-bold">Order ID: </span> ORDER_{{ order.id }}</p>
+            <p><span class="font-weight-bold">Order Status: </span> {{ order.order_status }}</p>
+            <p><span class="font-weight-bold">Order On: </span> {{ order.created_at }} ({{ order.created_at|timesince }} ago)</p>
+            <p><span class="font-weight-bold">Customer Information: </span> {{order.ordered_by}}</p>
+            <p><span class="font-weight-bold">Phone: </span> {{order.phone}}</p>
+            <p><span class="font-weight-bold">Email: </span> {{order.email}}</p>
+            <p><span class="font-weight-bold">Shipping Address: </span> {{order.shipping_address}}</p>
+            <p><span class="font-weight-bold">Payment Information: </span>  Using {{ order.payment_method }}</p>
+            <h4>Ordered Items</h4>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>№</th>
+                        <th>Item</th>
+                        <th>Rate</th>
+                        <th>Quantity</th>
+                        <th>Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cart_product in cart_products %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td><a target="_blank"
+                                href="{% url 'product-detail' cart_product.product.slug %}">{{ cart_product.product.title }} (id_{{ cart_product.product.id }})</a>
+                        </td>
+                        <td>{{ cart_product.rate }}</td>
+                        <td>{{ cart_product.quantity }}</td>
+                        <td>{{ cart_product.subtotal }}</td>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <th colspan="4" class="text-right">Total: </th>
+                        <th>{{ order.total }}$</th>
+                    </tr>
+                </tbody>
+            </table>
+            <form action="{% url 'custom-admin-order-status' order.id %}" method="POST" style="margin-bottom: 20px;">
+                {% csrf_token %}
+                <select name="status">
+                    {% for i, j in all_status %}
+                    <option value="{{ i }}" {% if i == order.order_status %}selected{% endif %}>{{ j }}</option>
+                    {% endfor %}
+                </select>
+                <button class="btn btn-primary">Change</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

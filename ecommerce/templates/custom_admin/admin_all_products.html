@@ -1,0 +1,37 @@
+{% extends "custom_admin/admin_base.html" %}
+
+{% block title %}All Products{% endblock %}
+
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h3>All Product list</h3><hr>
+            <a href="{% url 'custom-admin-add-product' %}" class="btn btn-primary">Add New Product</a>
+            <table class="table table-striped" style="margin-top: 15px;">
+                <thead>
+                    <tr>
+                        <th>№</th>
+                        <th>Product Title</th>
+                        <th>Image</th>
+                        <th>Price</th>
+                        <th>Views</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for product in all_products %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ product.title }}</td>
+                        <td><img src="{{ product.image.url }}" style="height: 60px;" alt=""></td>
+                        <td>{{ product.selling_price }}</td>
+                        <td>{{ product.view_count }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

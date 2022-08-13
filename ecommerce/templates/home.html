@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="text-center">Welcome to my e-commerce website</h1>
+    <hr>
+    <div class="row mt-3 mb-5">
+        {% for product in product_list %}
+        <div class="col-md-3 card" style="text-align: center;">
+            <div class="m-4">
+                <h4><a href="{% url 'product-detail' product.slug %}">{{ product.title }}</a></h4>
+                <img src="{{ product.image.url }}" alt="" class="img-fluid" style="height: 200px; object-fit: contain;">
+                <p class="mt-2"><a class="dropdown-item" href="{% url 'category-list' product.category.slug %}">{{ product.category }}</a></p>
+                <p><strike>{{ product.market_price }}$</strike> {{ product.selling_price }}$</p>
+                <p><small>Views: {{ product.view_count }}</small></p>
+                <a href="{% url 'add-to-card' product.id %}" class="btn btn-primary">Add To Cart</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

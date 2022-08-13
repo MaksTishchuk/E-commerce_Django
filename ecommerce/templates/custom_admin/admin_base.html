@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-primary">
+        <a class="navbar-brand" href="{% url 'home' %}">Maks E-commerce</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'custom-admin-home' %}">Home</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'custom-admin-all-orders' %}">All Orders</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'custom-admin-all-products' %}">All Products</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'home' %}" target="_blank">Visit site</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div style="margin-top: 80px;"></div>
+    {% block content %}
+
+    {% endblock %}
+</body>
+</html>
