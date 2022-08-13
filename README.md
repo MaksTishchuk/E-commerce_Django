@@ -9,7 +9,7 @@
 - Postgresql;
 - Packages from file requirements.txt;
 
-### Разработка
+### Development
 
 ##### 1) Clone repository
 
