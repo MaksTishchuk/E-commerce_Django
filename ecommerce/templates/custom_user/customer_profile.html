@@ -1,59 +1,60 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
-{% block title %}My Profile{% endblock %}
+{% block title %}{% trans "My Profile" %}{% endblock %}
 
 {% block content %}
 <div class="container">
     <div class="row">
         <div class="col-md-4">
-            <h3>Customer Information</h3><hr>
-            <p><span class="font-weight-bold">Username: </span>
+            <h3>{% trans "Customer Information" %}</h3><hr>
+            <p><span class="font-weight-bold">{% trans "Username:" %} </span>
                 {{ customer.user.username }}
             </p>
-            <p><span class="font-weight-bold">Email: </span>
+            <p><span class="font-weight-bold">{% trans "Email:" %} </span>
                 {% if customer.user.email %}
                     {{ customer.user.email }}
                 {% else %}
                     Not specified
                 {% endif %}
             </p>
-            <p><span class="font-weight-bold">Joined on: </span>
+            <p><span class="font-weight-bold">{% trans "Joined on:" %} </span>
                 {{ customer.joined_in }}
             </p>
-            <p><span class="font-weight-bold">Name: </span>
+            <p><span class="font-weight-bold">{% trans "Name:" %} </span>
                 {% if customer.full_name %}
                     {{ customer.full_name }}
                 {% else %}
                     Not specified
                 {% endif %}
             </p>
-            <p><span class="font-weight-bold">Address: </span>
+            <p><span class="font-weight-bold">{% trans "Address:" %} </span>
                 {% if customer.address %}
                     {{ customer.address }}
                 {% else %}
                     Not specified
                 {% endif %}
             </p>
-            <p><span class="font-weight-bold">Phone: </span>
+            <p><span class="font-weight-bold">{% trans "Phone:" %} </span>
                 {% if customer.phone %}
                     {{ customer.phone }}
                 {% else %}
                     Not specified
                 {% endif %}
             </p>
-            <a class="btn btn-primary" href="{% url 'customer-update-profile' customer.id %}">Update Customer Information</a>
+            <a class="btn btn-primary" href="{% url 'customer-update-profile' customer.id %}">{% trans "Update Customer Information" %}</a>
         </div>
         <div class="col-md-8">
-            <h3>Customer Orders</h3>
+            <h3>{% trans "Customer Orders" %}</h3>
             <hr>
             <table class="table">
                 <thead>
                     <tr>
                         <th>№</th>
-                        <th>Order ID</th>
-                        <th>Amount</th>
-                        <th>Ordered on</th>
-                        <th>Status</th>
+                        <th>{% trans "Order ID" %}</th>
+                        <th>{% trans "Amount" %}</th>
+                        <th>{% trans "Ordered on" %}</th>
+                        <th>{% trans "Status" %}</th>
                     </tr>
                 </thead>
                 <tbody>

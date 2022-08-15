@@ -1,22 +1,23 @@
 {% extends "custom_admin/admin_base.html" %}
+{% load i18n %}
 
-{% block title %}All Products{% endblock %}
+{% block title %}{% trans "All Products" %}{% endblock %}
 
 
 {% block content %}
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h3>All Product list</h3><hr>
-            <a href="{% url 'custom-admin-add-product' %}" class="btn btn-primary">Add New Product</a>
+            <h3>{% trans "All Product list" %}</h3><hr>
+            <a href="{% url 'custom-admin-add-product' %}" class="btn btn-primary">{% trans "Add New Product" %}</a>
             <table class="table table-striped" style="margin-top: 15px;">
                 <thead>
                     <tr>
                         <th>№</th>
-                        <th>Product Title</th>
-                        <th>Image</th>
-                        <th>Price</th>
-                        <th>Views</th>
+                        <th>{% trans "Product Title" %}</th>
+                        <th>{% trans "Image" %}</th>
+                        <th>{% trans "Price" %}</th>
+                        <th>{% trans "Views" %}</th>
                     </tr>
                 </thead>
                 <tbody>

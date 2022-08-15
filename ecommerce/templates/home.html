@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
-{% block title %}Home{% endblock %}
+{% block title %}{% trans "Home" %}{% endblock %}
 
 {% block content %}
 <div class="container">
-    <h1 class="text-center">Welcome to my e-commerce website</h1>
+    <h1 class="text-center">{% trans "Welcome to my e-commerce website" %}</h1>
     <hr>
     <div class="row mt-3 mb-5">
         {% for product in product_list %}
@@ -14,8 +15,8 @@
                 <img src="{{ product.image.url }}" alt="" class="img-fluid" style="height: 200px; object-fit: contain;">
                 <p class="mt-2"><a class="dropdown-item" href="{% url 'category-list' product.category.slug %}">{{ product.category }}</a></p>
                 <p><strike>{{ product.market_price }}$</strike> {{ product.selling_price }}$</p>
-                <p><small>Views: {{ product.view_count }}</small></p>
-                <a href="{% url 'add-to-card' product.id %}" class="btn btn-primary">Add To Cart</a>
+                <p><small>{% trans "Views" %}: {{ product.view_count }}</small></p>
+                <a href="{% url 'add-to-card' product.id %}" class="btn btn-primary">{% trans "Add To Cart" %}</a>
             </div>
         </div>
         {% endfor %}

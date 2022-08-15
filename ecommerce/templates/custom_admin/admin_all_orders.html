@@ -1,21 +1,22 @@
 {% extends "custom_admin/admin_base.html" %}
+{% load i18n %}
 
-{% block title %}All Orders{% endblock %}
+{% block title %}{% trans "All Orders" %}{% endblock %}
 
 {% block content %}
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h3>All Orders</h3><hr>
+            <h3>{% trans "All Orders" %}</h3><hr>
             <table class="table">
                 <thead>
                     <tr>
                         <th>№</th>
-                        <th>Order ID </th>
-                        <th>Customer</th>
-                        <th>Ordered On</th>
-                        <th>Amount</th>
-                        <th>Status</th>
+                        <th>{% trans "Order ID" %}</th>
+                        <th>{% trans "Customer" %}</th>
+                        <th>{% trans "Ordered On" %}</th>
+                        <th>{% trans "Amount" %}</th>
+                        <th>{% trans "Status" %}</th>
                     </tr>
                 </thead>
                 <tbody>

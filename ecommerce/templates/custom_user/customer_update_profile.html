@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
-{% block title %}Update Customer Information{% endblock %}
+{% block title %}{% trans "Update Customer Information" %}{% endblock %}
 
 {% block content %}
 <style>
@@ -11,11 +12,11 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6 mx-auto">
-            <h3>Customer Update Form</h3><hr>
+            <h3>{% trans "Customer Update Form" %}</h3><hr>
             <form action="" method="POST">
                 {% csrf_token %}
                 {{ form.as_p }}
-                <button class="btn btn-primary">Update Customer Info</button>
+                <button class="btn btn-primary">{% trans "Update Customer Info" %}</button>
             </form>
         </div>
     </div>

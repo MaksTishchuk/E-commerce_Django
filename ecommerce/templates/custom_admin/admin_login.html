@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
-{% block title %}Admin Login{% endblock %}
+{% block title %}{% trans "Amount" %}Admin Login{% endblock %}
 
 {% block content %}
 <style>
@@ -11,12 +12,12 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6 mx-auto">
-            <h3>Admin Login Form</h3>
+            <h3>{% trans "Admin Login Form" %}</h3>
             <hr>
             <form action="" method="POST">
                 {% csrf_token %}
                 {{ form.as_p }}
-                <button class="btn btn-primary">Login as Admin</button>
+                <button class="btn btn-primary">{% trans "Login as Admin" %}</button>
                 {% if error %}
                 <li style="color: red;">{{ error }}</li>
                 {% endif %}

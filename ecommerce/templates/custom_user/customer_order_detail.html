@@ -1,29 +1,30 @@
 {% extends "base.html" %}
+{% load i18n %}
 
-{% block title %}Order Detail{% endblock %}
+{% block title %}{% trans "Order Detail" %}{% endblock %}
 
 {% block content %}
 <div class="container">
     <div class="row">
         <div class="col-md-8 mx-auto">
-            <h3>Order Detail</h3><hr>
-            <a class="btn btn-primary" style="margin-bottom: 10px;" target="_blank" href="{% url 'customer-make-pdf' order.id %}">Load Order PDF</a>
-            <p><span class="font-weight-bold">Order ID: </span>ORDER_{{ order.id }}</p>
-            <p><span class="font-weight-bold">Order Status: </span> {{ order.order_status }}</p>
-            <p><span class="font-weight-bold">Order On: </span> {{ order.created_at }} ({{ order.created_at|timesince }} ago)</p>
-            <p><span class="font-weight-bold">Customer Information: </span> {{ order.ordered_by }}</p>
-            <p><span class="font-weight-bold">Phone: </span> {{ order.phone }}</p>
-            <p><span class="font-weight-bold">Email: </span> {{ order.email }}</p>
-            <p><span class="font-weight-bold">Shipping Address: </span> {{ order.shipping_address }}</p>
-            <h4>Ordered Items</h4>
+            <h3>{% trans "Order Detail" %}</h3><hr>
+            <a class="btn btn-primary" style="margin-bottom: 10px;" target="_blank" href="{% url 'customer-make-pdf' order.id %}">{% trans "Load Order PDF" %}</a>
+            <p><span class="font-weight-bold">{% trans "Order ID:" %} </span>ORDER_{{ order.id }}</p>
+            <p><span class="font-weight-bold">{% trans "Order Status:" %} </span> {{ order.order_status }}</p>
+            <p><span class="font-weight-bold">{% trans "Order On:" %} </span> {{ order.created_at }} ({{ order.created_at|timesince }} ago)</p>
+            <p><span class="font-weight-bold">{% trans "Customer Information:" %} </span> {{ order.ordered_by }}</p>
+            <p><span class="font-weight-bold">{% trans "Phone:" %} </span> {{ order.phone }}</p>
+            <p><span class="font-weight-bold">{% trans "Email:" %} </span> {{ order.email }}</p>
+            <p><span class="font-weight-bold">{% trans "Shipping Address:" %} </span> {{ order.shipping_address }}</p>
+            <h4>{% trans "Ordered Items" %}</h4>
             <table class="table">
                 <thead>
                     <tr>
                         <th>№</th>
-                        <th>Item</th>
-                        <th>Rate</th>
-                        <th>Quantity</th>
-                        <th>Subtotal</th>
+                        <th>{% trans "Item" %}</th>
+                        <th>{% trans "Rate" %}</th>
+                        <th>{% trans "Quantity" %}</th>
+                        <th>{% trans "Subtotal %}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -36,7 +37,7 @@
                         <td>{{ cart_product.subtotal }}</td>
                     {% endfor %}
                     <tr>
-                        <th colspan="4" class="text-right">Total: </th>
+                        <th colspan="4" class="text-right">{% trans "Total" %}: </th>
                         <td>{{ order.total }}$</td>
                     </tr>
                 </tbody>

@@ -9,6 +9,7 @@
 </head>
 
 <body>
+    {% load i18n %}
     {% load category_tags %}
 
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-primary">
@@ -20,50 +21,76 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'home' %}">Home</a>
+                    <a class="nav-link" href="{% url 'home' %}">{% trans "Home" %}</a>
                 </li>
                 <li class="nav-item dropdown active">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Categories
+                        {% trans "Categories" %}
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{% url 'all-products' %}">All products</a>
+                        <a class="dropdown-item" href="{% url 'all-products' %}">{% trans "All products" %}</a>
                     {% get_categories %}
                     </div>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'my-cart' %}">Cart</a>
+                    <a class="nav-link" href="{% url 'my-cart' %}">{% trans "Cart" %}</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'about' %}">About</a>
+                    <a class="nav-link" href="{% url 'about' %}">{% trans "About" %}</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'contact' %}">Contact</a>
+                    <a class="nav-link" href="{% url 'contact' %}">{% trans "Contact" %}</a>
+                </li>
+                <li class="nav-item dropdown active">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown4" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {% trans "Language" %}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <form action="{% url 'select-language' %}" method="post">
+                            {% csrf_token %}
+                            <input name="next" type="hidden" value="{{ redirect_to }}">
+                            <select name="language" onchange="submit()">
+                                {% get_current_language as LANGUAGE_CODE %}
+                                {% get_available_languages as LANGUAGES %}
+                                {% get_language_info_list for LANGUAGES as languages %}
+                                {% for language in languages %}
+                                <option value="{{ language.code }}" {% if language.code == LANGUAGE_CODE %}selected{% endif %}>
+                                    {{ language.name_local }} ({{ language.code }})
+                                </option>
+                                {% endfor %}
+                            </select>
+                            <noscript>
+                                <input type="submit" value="Set"/>
+                            </noscript>
+                        </form>
+                    </div>
                 </li>
                 <li class="nav-item dropdown active">
                     {% if request.user.customer %}
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Welcome, {{ request.user.username }}!
+                        {% trans "Welcome" %}, {{ request.user.username }}!
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{% url 'customer-profile' %}">My Profile</a>
-                        <a class="dropdown-item" href="{% url 'customer-logout' %}">Logout</a>
+                        <a class="dropdown-item" href="{% url 'customer-profile' %}">{% trans "My Profile" %}</a>
+                        <a class="dropdown-item" href="{% url 'customer-logout' %}">{% trans "Logout" %}</a>
                     </div>
                     {% else %}
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        My Account
+                        {% trans "My Account" %}
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{% url 'customer-registration' %}">Register</a>
-                        <a class="dropdown-item" href="{% url 'customer-login' %}">Login</a>
+                        <a class="dropdown-item" href="{% url 'customer-registration' %}">{% trans "Register" %}</a>
+                        <a class="dropdown-item" href="{% url 'customer-login' %}">{% trans "Login" %}</a>
                     {% endif %}
                     </div>
                 </li>
+
+
             </ul>
-            <form class="form-inline my-2 my-lg-0" action="{% url 'search' %}" method="GET">
+            <form class="form-inline my-2 my-lg-0 mr-4" action="{% url 'search' %}" method="GET">
             <input name="query" class="form-control mr-sm-2" type="search" placeholder="Search"
                    aria-label="Search" required>
-            <button class="btn btn-danger my-2 my-sm-0" type="submit">Search</button>
+            <button class="btn btn-danger my-2 my-sm-0" type="submit">{% trans "Search" %}</button>
             </form>
         </div>
         </nav>

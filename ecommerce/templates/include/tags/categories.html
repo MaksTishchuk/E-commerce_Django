@@ -1,3 +1,4 @@
+{% load i18n %}
 {% for category in category_list %}
     <a class="dropdown-item" href="{% url 'category-list' category.slug %}">{{ category.title }}</a>
 {% endfor %}

@@ -1,0 +1,475 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-08-14 17:12+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n % 10 == 1 && n % 100 != "
+"11 ? 0 : n % 1 == 0 && n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % "
+"100 > 14) ? 1 : n % 1 == 0 && (n % 10 ==0 || (n % 10 >=5 && n % 10 <=9) || "
+"(n % 100 >=11 && n % 100 <=14 )) ? 2: 3);\n"
+
+#: .\config\settings.py:126
+msgid "English"
+msgstr "Українська"
+
+#: .\config\settings.py:127
+msgid "Ukrainian"
+msgstr "Українська"
+
+#: .\config\urls.py:16
+msgid "admin/"
+msgstr "admin/"
+
+#: .\templates\about.html:4
+msgid "About us"
+msgstr "Про нас"
+
+#: .\templates\about.html:7
+msgid "We are the emerging ecommerce in the City."
+msgstr "Ми найбільший магазин в місті"
+
+#: .\templates\base.html:24 .\templates\custom_admin\admin_base.html:20
+#: .\templates\home.html:4
+msgid "Home"
+msgstr "Домашня"
+
+#: .\templates\base.html:28
+msgid "Categories"
+msgstr "Категорії"
+
+#: .\templates\base.html:31
+msgid "All products"
+msgstr "Всі товари"
+
+#: .\templates\base.html:36
+msgid "Cart"
+msgstr "Кошик"
+
+#: .\templates\base.html:39
+msgid "About"
+msgstr "Про нас"
+
+#: .\templates\base.html:42
+msgid "Contact"
+msgstr "Контакти"
+
+#: .\templates\base.html:46
+msgid "Language"
+msgstr "Мова"
+
+#: .\templates\base.html:71
+msgid "Welcome"
+msgstr "Ласкаво просимо"
+
+#: .\templates\base.html:74 .\templates\custom_user\customer_profile.html:4
+msgid "My Profile"
+msgstr "Мій профіль"
+
+#: .\templates\base.html:75
+msgid "Logout"
+msgstr "Вийти"
+
+#: .\templates\base.html:79
+msgid "My Account"
+msgstr "Мій аккаунт"
+
+#: .\templates\base.html:82
+msgid "Register"
+msgstr "Реєстрація"
+
+#: .\templates\base.html:83
+msgid "Login"
+msgstr "Ввійти"
+
+#: .\templates\base.html:93
+msgid "Search"
+msgstr "Пошук"
+
+#: .\templates\cart\checkout.html:4 .\templates\cart\checkout.html:40
+#: .\templates\cart\my_cart.html:54
+msgid "Checkout"
+msgstr "Оформити"
+
+#: .\templates\cart\checkout.html:10
+msgid "Items in the cart"
+msgstr "Товари в кошику"
+
+#: .\templates\cart\checkout.html:15 .\templates\cart\my_cart.html:15
+#: .\templates\shop\product_detail.html:8
+msgid "Product"
+msgstr "Товар"
+
+#: .\templates\cart\checkout.html:16 .\templates\cart\my_cart.html:16
+#: .\templates\custom_admin\admin_order_detail.html:27
+#: .\templates\custom_user\customer_order_detail.html:25
+msgid "Rate"
+msgstr "Ціна"
+
+#: .\templates\cart\checkout.html:17 .\templates\cart\my_cart.html:17
+#: .\templates\custom_admin\admin_order_detail.html:28
+#: .\templates\custom_user\customer_order_detail.html:26
+msgid "Quantity"
+msgstr "Кількість"
+
+#: .\templates\cart\checkout.html:18 .\templates\cart\my_cart.html:18
+#: .\templates\custom_admin\admin_order_detail.html:29
+msgid "Subtotal"
+msgstr "Остаточна ціна"
+
+#: .\templates\cart\checkout.html:32 .\templates\cart\my_cart.html:46
+#: .\templates\custom_admin\admin_order_detail.html:45
+#: .\templates\custom_user\customer_order_detail.html:40
+msgid "Total"
+msgstr "Всього"
+
+#: .\templates\cart\checkout.html:37
+msgid "Update Cart"
+msgstr "Оновити кошик"
+
+#: .\templates\cart\checkout.html:44
+msgid "Place order"
+msgstr "Розмістити замовлення"
+
+#: .\templates\cart\my_cart.html:4
+msgid "My cart"
+msgstr "Мій кошик"
+
+#: .\templates\cart\my_cart.html:10
+msgid "Items in my cart"
+msgstr "Товари в моєму кошику"
+
+#: .\templates\cart\my_cart.html:19
+msgid "Delete"
+msgstr "Видалити"
+
+#: .\templates\cart\my_cart.html:49
+msgid "Clear Cart"
+msgstr "Очистити кошик"
+
+#: .\templates\contact.html:4
+msgid "Contact us"
+msgstr "Контакти"
+
+#: .\templates\contact.html:7
+msgid "To Contact us, Call the following numbers"
+msgstr "Щоб зв'язатися з нами, подзвоніть за телефоном"
+
+#: .\templates\custom_admin\admin_all_orders.html:4
+#: .\templates\custom_admin\admin_all_orders.html:10
+#: .\templates\custom_admin\admin_base.html:23
+msgid "All Orders"
+msgstr "Всі замовлення"
+
+#: .\templates\custom_admin\admin_all_orders.html:15
+#: .\templates\custom_admin\admin_home.html:15
+#: .\templates\custom_user\customer_profile.html:54
+msgid "Order ID"
+msgstr "ИД замовлення"
+
+#: .\templates\custom_admin\admin_all_orders.html:16
+#: .\templates\custom_admin\admin_home.html:16
+msgid "Customer"
+msgstr "Покупець"
+
+#: .\templates\custom_admin\admin_all_orders.html:17
+#: .\templates\custom_admin\admin_home.html:17
+msgid "Ordered On"
+msgstr "Покупець"
+
+#: .\templates\custom_admin\admin_all_orders.html:18
+#: .\templates\custom_admin\admin_home.html:18
+#: .\templates\custom_admin\admin_login.html:4
+#: .\templates\custom_user\customer_profile.html:55
+msgid "Amount"
+msgstr "Сума"
+
+#: .\templates\custom_admin\admin_all_orders.html:19
+#: .\templates\custom_user\customer_profile.html:57
+msgid "Status"
+msgstr "Статус"
+
+#: .\templates\custom_admin\admin_all_products.html:4
+#: .\templates\custom_admin\admin_base.html:26
+#: .\templates\shop\products.html:11 .\templates\shop\products.html:22
+msgid "All Products"
+msgstr "Всі товари"
+
+#: .\templates\custom_admin\admin_all_products.html:11
+msgid "All Product list"
+msgstr "Список всіх товарів"
+
+#: .\templates\custom_admin\admin_all_products.html:12
+#: .\templates\custom_admin\admin_create_product.html:4
+msgid "Add New Product"
+msgstr "Всі нові товари"
+
+#: .\templates\custom_admin\admin_all_products.html:17
+msgid "Product Title"
+msgstr "Назва товару"
+
+#: .\templates\custom_admin\admin_all_products.html:18
+msgid "Image"
+msgstr "Зображення"
+
+#: .\templates\custom_admin\admin_all_products.html:19
+#: .\templates\shop\product_detail.html:27
+msgid "Price"
+msgstr "Ціна"
+
+#: .\templates\custom_admin\admin_all_products.html:20 .\templates\home.html:18
+#: .\templates\shop\product_detail.html:26
+msgid "Views"
+msgstr "Перегляди"
+
+#: .\templates\custom_admin\admin_base.html:29
+msgid "Visit site"
+msgstr "Відвідати сайт"
+
+#: .\templates\custom_admin\admin_create_product.html:10
+#: .\templates\custom_admin\admin_home.html:4
+msgid "Add New product"
+msgstr "Всі нові товари"
+
+#: .\templates\custom_admin\admin_create_product.html:15
+msgid "Submit Data"
+msgstr "Підтвердити дані"
+
+#: .\templates\custom_admin\admin_home.html:10
+msgid "Pending Orders"
+msgstr "Розміщені замовлення"
+
+#: .\templates\custom_admin\admin_login.html:15
+msgid "Admin Login Form"
+msgstr "Форма входу"
+
+#: .\templates\custom_admin\admin_login.html:20
+msgid "Login as Admin"
+msgstr "Ввійти як адміністратор"
+
+#: .\templates\custom_admin\admin_order_detail.html:4
+#: .\templates\custom_admin\admin_order_detail.html:10
+#: .\templates\custom_user\customer_order_detail.html:4
+#: .\templates\custom_user\customer_order_detail.html:10
+msgid "Order Detail"
+msgstr "Деталі замовлення"
+
+#: .\templates\custom_admin\admin_order_detail.html:12
+#: .\templates\custom_user\customer_order_detail.html:11
+msgid "Load Order PDF"
+msgstr "Завантажити файл замовлення"
+
+#: .\templates\custom_admin\admin_order_detail.html:13
+#: .\templates\custom_user\customer_order_detail.html:12
+msgid "Order ID:"
+msgstr "ИД замовлення:"
+
+#: .\templates\custom_admin\admin_order_detail.html:14
+#: .\templates\custom_user\customer_order_detail.html:13
+msgid "Order Status:"
+msgstr "Статус замовлення:"
+
+#: .\templates\custom_admin\admin_order_detail.html:15
+#: .\templates\custom_user\customer_order_detail.html:14
+msgid "Order On:"
+msgstr "Покупець:"
+
+#: .\templates\custom_admin\admin_order_detail.html:16
+#: .\templates\custom_user\customer_order_detail.html:15
+msgid "Customer Information:"
+msgstr "Інформація про покупця:"
+
+#: .\templates\custom_admin\admin_order_detail.html:17
+#: .\templates\custom_user\customer_order_detail.html:16
+#: .\templates\custom_user\customer_profile.html:38
+msgid "Phone:"
+msgstr "Телефон:"
+
+#: .\templates\custom_admin\admin_order_detail.html:18
+#: .\templates\custom_user\customer_order_detail.html:17
+#: .\templates\custom_user\customer_profile.html:14
+msgid "Email:"
+msgstr "Email:"
+
+#: .\templates\custom_admin\admin_order_detail.html:19
+#: .\templates\custom_user\customer_order_detail.html:18
+msgid "Shipping Address:"
+msgstr "Адреса відправки:"
+
+#: .\templates\custom_admin\admin_order_detail.html:20
+msgid "Payment Information:"
+msgstr "Інформація про оплату:"
+
+#: .\templates\custom_admin\admin_order_detail.html:21
+#: .\templates\custom_user\customer_order_detail.html:19
+msgid "Ordered Items"
+msgstr "Замовлені товари"
+
+#: .\templates\custom_admin\admin_order_detail.html:26
+#: .\templates\custom_user\customer_order_detail.html:24
+msgid "Item"
+msgstr "Товар"
+
+#: .\templates\custom_admin\admin_order_detail.html:57
+msgid "Change"
+msgstr "Змінити"
+
+#: .\templates\custom_user\customer_login.html:4
+msgid "Customer Login"
+msgstr "Вхід"
+
+#: .\templates\custom_user\customer_login.html:11
+msgid "Customer Login Form"
+msgstr "Форма входу"
+
+#: .\templates\custom_user\customer_login.html:19
+msgid "Login as a Customer"
+msgstr "Ввійти"
+
+#: .\templates\custom_user\customer_login.html:21
+msgid "Reset now"
+msgstr "Зкинути"
+
+#: .\templates\custom_user\customer_login.html:22
+msgid "or don`t have account?"
+msgstr "чи немає аккаунту?"
+
+#: .\templates\custom_user\customer_login.html:24
+msgid "Register here"
+msgstr "Зареєструватися тут"
+
+#: .\templates\custom_user\customer_profile.html:10
+msgid "Customer Information"
+msgstr "Інформація про покупця"
+
+#: .\templates\custom_user\customer_profile.html:11
+msgid "Username:"
+msgstr "Username:"
+
+#: .\templates\custom_user\customer_profile.html:21
+msgid "Joined on:"
+msgstr "Приєднався:"
+
+#: .\templates\custom_user\customer_profile.html:24
+msgid "Name:"
+msgstr "ПІБ:"
+
+#: .\templates\custom_user\customer_profile.html:31
+msgid "Address:"
+msgstr "Адреса:"
+
+#: .\templates\custom_user\customer_profile.html:45
+#: .\templates\custom_user\customer_update_profile.html:4
+msgid "Update Customer Information"
+msgstr "Оновити інформація про покупця"
+
+#: .\templates\custom_user\customer_profile.html:48
+msgid "Customer Orders"
+msgstr "Замовлення покупця"
+
+#: .\templates\custom_user\customer_profile.html:56
+msgid "Ordered on"
+msgstr "Покупець"
+
+#: .\templates\custom_user\customer_registration.html:4
+msgid "Customer Registration"
+msgstr "Реєстрація покупця"
+
+#: .\templates\custom_user\customer_registration.html:15
+msgid "Customer Registration Form"
+msgstr "Форма реєстріції"
+
+#: .\templates\custom_user\customer_registration.html:19
+msgid "Register as a Customer"
+msgstr "Зареєструватися"
+
+#: .\templates\custom_user\customer_registration.html:21
+msgid "Already have an account?"
+msgstr "Вже є аккаунт?"
+
+#: .\templates\custom_user\customer_registration.html:21
+msgid "Login here"
+msgstr "Ввійти тут"
+
+#: .\templates\custom_user\customer_update_profile.html:15
+msgid "Customer Update Form"
+msgstr "Форма оновлення інформації"
+
+#: .\templates\custom_user\customer_update_profile.html:19
+msgid "Update Customer Info"
+msgstr "Оновити інформацію"
+
+#: .\templates\custom_user\forgot_password.html:4
+msgid "Forgot password"
+msgstr "Забули пароль"
+
+#: .\templates\custom_user\forgot_password.html:11
+msgid ""
+"Password reset link is sent to your email address. Please check your email."
+msgstr ""
+"На вашу поштову адресу відправлено лист з посиланням на оновлення паролю."
+
+#: .\templates\custom_user\forgot_password.html:13
+msgid ""
+"Enter your email used in making customer account to get password reset link."
+msgstr ""
+"Введіть ваш email, який ви вказали при реєстрації, щоб отримати посилання на "
+"оновлення паролю."
+
+#: .\templates\custom_user\forgot_password.html:15
+msgid "Something went wrong, please enter your email again."
+msgstr "Щось пішло не так, введіть повторно ваш email."
+
+#: .\templates\custom_user\forgot_password.html:20
+msgid "Get Reset Link"
+msgstr "Отримати посилання"
+
+#: .\templates\custom_user\reset_password.html:4
+#: .\templates\custom_user\reset_password.html:13
+msgid "Reset password"
+msgstr "Зкинути пароль"
+
+#: .\templates\home.html:8
+msgid "Welcome to my e-commerce website"
+msgstr "Ласково просимо до мого e-commerce сайту"
+
+#: .\templates\home.html:19 .\templates\shop\product_detail.html:28
+#: .\templates\shop\products.html:40
+msgid "Add To Cart"
+msgstr "Додати у кошик"
+
+#: .\templates\shop\product_detail.html:25
+msgid "Category"
+msgstr "Категорія"
+
+#: .\templates\shop\product_detail.html:30
+msgid "Warranty"
+msgstr "Гарантія"
+
+#: .\templates\shop\product_detail.html:31
+msgid "Return Policy"
+msgstr "Повернення"
+
+#: .\templates\shop\products.html:9
+msgid "Search result"
+msgstr "Результати пошуку"
+
+#: .\templates\shop\products.html:20
+msgid "Search result for"
+msgstr "Результати пошуку для"
+
+#: .\templates\shop\products.html:28
+msgid "Apply"
+msgstr "Застосувати"

@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
-{% block title %}Customer Registration{% endblock %}
+{% block title %}{% trans "Customer Registration" %}{% endblock %}
 
 {% block content %}
 <style>
@@ -11,13 +12,13 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6 mx-auto">
-            <h3>Customer Registration Form</h3><hr>
+            <h3>{% trans "Customer Registration Form" %}</h3><hr>
             <form action="" method="POST">
                 {% csrf_token %}
                 {{ form.as_p }}
-                <button class="btn btn-primary">Register as a Customer</button>
+                <button class="btn btn-primary">{% trans "Register as a Customer" %}</button>
             </form>
-            <p> Already have an account? <a href="{% url 'customer-login' %}">Login here</a></p>
+            <p>{% trans "Already have an account?" %} <a href="{% url 'customer-login' %}">{% trans "Login here" %}</a></p>
         </div>
     </div>
 </div>

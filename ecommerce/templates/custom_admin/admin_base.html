@@ -8,6 +8,7 @@
 </head>
 
 <body>
+{% load i18n %}
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-primary">
         <a class="navbar-brand" href="{% url 'home' %}">Maks E-commerce</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -16,16 +17,16 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'custom-admin-home' %}">Home</a>
+                    <a class="nav-link" href="{% url 'custom-admin-home' %}">{% trans "Home" %}</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'custom-admin-all-orders' %}">All Orders</a>
+                    <a class="nav-link" href="{% url 'custom-admin-all-orders' %}">{% trans "All Orders" %}</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'custom-admin-all-products' %}">All Products</a>
+                    <a class="nav-link" href="{% url 'custom-admin-all-products' %}">{% trans "All Products" %}</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'home' %}" target="_blank">Visit site</a>
+                    <a class="nav-link" href="{% url 'home' %}" target="_blank">{% trans "Visit site" %}</a>
                 </li>
             </ul>
         </div>
