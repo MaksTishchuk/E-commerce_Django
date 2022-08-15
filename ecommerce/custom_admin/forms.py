@@ -20,10 +20,15 @@ class CustomAdminCreateProductForm(forms.ModelForm):
 
     class Meta:
         model = Product
-        fields = ["title", "slug", "category", "image", "market_price",
-                  "selling_price", "description", "warranty", "return_policy"]
+        fields = ["title_en", "title_uk", "slug", "category", "image", "market_price",
+                  "selling_price", "description_en", "description_uk", "warranty_en",
+                  "warranty_uk", "return_policy_en", "return_policy_uk"]
         widgets = {
-            "title": forms.TextInput(attrs={
+            "title_en": forms.TextInput(attrs={
+                "class": "form-control",
+                "placeholder": "Enter the product title here..."
+            }),
+            "title_uk": forms.TextInput(attrs={
                 "class": "form-control",
                 "placeholder": "Enter the product title here..."
             }),
@@ -45,20 +50,32 @@ class CustomAdminCreateProductForm(forms.ModelForm):
                 "class": "form-control",
                 "placeholder": "Selling price of the product..."
             }),
-            "description": forms.Textarea(attrs={
+            "description_en": forms.Textarea(attrs={
                 "class": "form-control",
                 "placeholder": "Description of the product...",
                 "rows": 5
             }),
-            "warranty": forms.TextInput(attrs={
+            "description_uk": forms.Textarea(attrs={
+                "class": "form-control",
+                "placeholder": "Description of the product...",
+                "rows": 5
+            }),
+            "warranty_en": forms.TextInput(attrs={
                 "class": "form-control",
                 "placeholder": "Enter the product warranty here..."
             }),
-            "return_policy": forms.TextInput(attrs={
+            "warranty_uk": forms.TextInput(attrs={
+                "class": "form-control",
+                "placeholder": "Enter the product warranty here..."
+            }),
+            "return_policy_en": forms.TextInput(attrs={
                 "class": "form-control",
                 "placeholder": "Enter the product return policy here..."
             }),
-
+            "return_policy_uk": forms.TextInput(attrs={
+                "class": "form-control",
+                "placeholder": "Enter the product return policy here..."
+            }),
         }
 
 
