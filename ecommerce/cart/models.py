@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 from shop.models import Product
 
@@ -7,11 +8,11 @@ from shop.models import Product
 class Customer(models.Model):
     """ Model Customer """
 
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    full_name = models.CharField(max_length=200, null=True, blank=True)
-    phone = models.CharField(max_length=20, null=True, blank=True)
-    address = models.CharField(max_length=300, null=True, blank=True)
-    joined_in = models.DateTimeField(auto_now_add=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name=_('User'))
+    full_name = models.CharField(max_length=200, null=True, blank=True, verbose_name=_('Full Name'))
+    phone = models.CharField(max_length=20, null=True, blank=True, verbose_name=_('Phone'))
+    address = models.CharField(max_length=300, null=True, blank=True, verbose_name=_('Address'))
+    joined_in = models.DateTimeField(auto_now_add=True, verbose_name=_('Joined In'))
 
     def __str__(self):
         return f'User: {self.user}'
@@ -25,9 +26,13 @@ class Customer(models.Model):
 class Cart(models.Model):
     """ Model Cart """
 
-    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True, blank=True)
-    final_price = models.DecimalField(max_digits=10, default=0, decimal_places=2)
-    created_at = models.DateTimeField(auto_now_add=True)
+    customer = models.ForeignKey(
+        Customer, on_delete=models.SET_NULL, null=True, blank=True, verbose_name=_('Customer')
+    )
+    final_price = models.DecimalField(
+        max_digits=10, default=0, decimal_places=2, verbose_name=_('Final Price')
+    )
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name=_('Created at'))
 
     def __str__(self):
         return f'User: {self.customer} - Cart: {self.id}'
@@ -41,11 +46,11 @@ class Cart(models.Model):
 class CartProduct(models.Model):
     """ Model Cart Product """
 
-    cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    rate = models.PositiveIntegerField()
-    quantity = models.PositiveIntegerField(default=1)
-    subtotal = models.PositiveIntegerField()
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE, verbose_name=_('Cart'))
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name=_('Product'))
+    rate = models.PositiveIntegerField(verbose_name=_('Rate'))
+    quantity = models.PositiveIntegerField(default=1, verbose_name=_('Quantity'))
+    subtotal = models.PositiveIntegerField(verbose_name=_('Subtotal'))
 
     def __str__(self):
         return f'Cart: {self.cart.id} - Cart Product: {self.id} - {self.product} - {self.quantity}'
@@ -67,18 +72,24 @@ class Order(models.Model):
         ("Order Canceled", "Order Canceled"),
     )
 
-    cart = models.OneToOneField(Cart, on_delete=models.CASCADE)
-    ordered_by = models.CharField(max_length=200)
-    shipping_address = models.CharField(max_length=200)
-    phone = models.CharField(max_length=12)
-    email = models.EmailField(null=True, blank=True)
-    subtotal = models.PositiveIntegerField()
-    discount = models.PositiveIntegerField()
-    total = models.PositiveIntegerField()
-    order_status = models.CharField(max_length=50, choices=ORDER_STATUS)
-    created_at = models.DateTimeField(auto_now_add=True)
-    payment_method = models.CharField(max_length=20, default="Cash On Delivery")
-    payment_completed = models.BooleanField(default=False, null=True, blank=True)
+    cart = models.OneToOneField(Cart, on_delete=models.CASCADE, verbose_name=_('Cart'))
+    ordered_by = models.CharField(max_length=200, verbose_name=_('Ordered by'))
+    shipping_address = models.CharField(max_length=200, verbose_name=_('Address'))
+    phone = models.CharField(max_length=12, verbose_name=_('Phone'))
+    email = models.EmailField(null=True, blank=True, verbose_name=_('Email'))
+    subtotal = models.PositiveIntegerField(verbose_name=_('Subtotal'))
+    discount = models.PositiveIntegerField(verbose_name=_('Discount'))
+    total = models.PositiveIntegerField(verbose_name=_('Total'))
+    order_status = models.CharField(
+        max_length=50, choices=ORDER_STATUS, verbose_name=_('Order Status')
+    )
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name=_('Created at'))
+    payment_method = models.CharField(
+        max_length=20, default="Cash On Delivery", verbose_name=_('Payment Method')
+    )
+    payment_completed = models.BooleanField(
+        default=False, null=True, blank=True, verbose_name=_('Payment Completed')
+    )
 
     def __str__(self):
         return f'Order: {self.id}'

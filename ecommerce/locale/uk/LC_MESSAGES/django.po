@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-15 14:24+0300\n"
+"POT-Creation-Date: 2022-08-15 16:30+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,6 +21,100 @@ msgstr ""
 "100 > 14) ? 1 : n % 1 == 0 && (n % 10 ==0 || (n % 10 >=5 && n % 10 <=9) || "
 "(n % 100 >=11 && n % 100 <=14 )) ? 2: 3);\n"
 
+#: .\cart\models.py:11 .\custom_admin\models.py:9
+msgid "User"
+msgstr "Username:"
+
+#: .\cart\models.py:12 .\custom_admin\models.py:11
+msgid "Full Name"
+msgstr "ПІБ"
+
+#: .\cart\models.py:13 .\cart\models.py:78 .\custom_admin\models.py:10
+msgid "Phone"
+msgstr "Телефон:"
+
+#: .\cart\models.py:14 .\cart\models.py:77
+msgid "Address"
+msgstr "Адреса:"
+
+#: .\cart\models.py:15
+msgid "Joined In"
+msgstr "Приєднався:"
+
+#: .\cart\models.py:30 .\templates\custom_admin\admin_all_orders.html:16
+#: .\templates\custom_admin\admin_home.html:16
+msgid "Customer"
+msgstr "Покупець"
+
+#: .\cart\models.py:33
+msgid "Final Price"
+msgstr "Ціна"
+
+#: .\cart\models.py:35 .\cart\models.py:86 .\shop\models.py:40
+msgid "Created at"
+msgstr "Дата створення"
+
+#: .\cart\models.py:49 .\cart\models.py:75 .\templates\base.html:36
+msgid "Cart"
+msgstr "Кошик"
+
+#: .\cart\models.py:50 .\shop\models.py:64 .\templates\cart\checkout.html:15
+#: .\templates\cart\my_cart.html:15 .\templates\shop\product_detail.html:8
+msgid "Product"
+msgstr "Товар"
+
+#: .\cart\models.py:51 .\templates\cart\checkout.html:16
+#: .\templates\cart\my_cart.html:16
+#: .\templates\custom_admin\admin_order_detail.html:27
+#: .\templates\custom_user\customer_order_detail.html:25
+msgid "Rate"
+msgstr "Ціна"
+
+#: .\cart\models.py:52 .\templates\cart\checkout.html:17
+#: .\templates\cart\my_cart.html:17
+#: .\templates\custom_admin\admin_order_detail.html:28
+#: .\templates\custom_user\customer_order_detail.html:26
+msgid "Quantity"
+msgstr "Кількість"
+
+#: .\cart\models.py:53 .\cart\models.py:80 .\templates\cart\checkout.html:18
+#: .\templates\cart\my_cart.html:18
+#: .\templates\custom_admin\admin_order_detail.html:29
+#: .\templates\custom_user\customer_order_detail.html:27
+msgid "Subtotal"
+msgstr "Остаточна ціна"
+
+#: .\cart\models.py:76
+msgid "Ordered by"
+msgstr "Дата замовлення"
+
+#: .\cart\models.py:79
+msgid "Email"
+msgstr "Email"
+
+#: .\cart\models.py:81
+msgid "Discount"
+msgstr "Знижка"
+
+#: .\cart\models.py:82 .\templates\cart\checkout.html:32
+#: .\templates\cart\my_cart.html:46
+#: .\templates\custom_admin\admin_order_detail.html:45
+#: .\templates\custom_user\customer_order_detail.html:40
+msgid "Total"
+msgstr "Всього"
+
+#: .\cart\models.py:84
+msgid "Order Status"
+msgstr "Статус замовлення:"
+
+#: .\cart\models.py:88
+msgid "Payment Method"
+msgstr "Метод оплати"
+
+#: .\cart\models.py:91
+msgid "Payment Completed"
+msgstr "Оплата завершена"
+
 #: .\config\settings.py:128
 msgid "English"
 msgstr "Українська"
@@ -32,6 +126,51 @@ msgstr "Українська"
 #: .\config\urls.py:16
 msgid "admin/"
 msgstr "admin/"
+
+#: .\custom_admin\models.py:12 .\shop\models.py:12 .\shop\models.py:38
+#: .\shop\models.py:66 .\templates\custom_admin\admin_all_products.html:18
+msgid "Image"
+msgstr "Зображення"
+
+#: .\custom_admin\models.py:13
+msgid "Joined in"
+msgstr "Приєднався:"
+
+#: .\shop\models.py:9 .\shop\models.py:30
+msgid "Title"
+msgstr "Найменування"
+
+#: .\shop\models.py:10 .\shop\models.py:31
+msgid "Slug"
+msgstr "Slug"
+
+#: .\shop\models.py:28 .\templates\shop\product_detail.html:25
+msgid "Category"
+msgstr "Категорія"
+
+#: .\shop\models.py:32
+msgid "Description"
+msgstr "Опис"
+
+#: .\shop\models.py:33 .\templates\shop\product_detail.html:30
+msgid "Warranty"
+msgstr "Гарантія"
+
+#: .\shop\models.py:35
+msgid "Return policy"
+msgstr "Повернення"
+
+#: .\shop\models.py:42
+msgid "Market Price"
+msgstr "Ціна"
+
+#: .\shop\models.py:45
+msgid "Selling Price"
+msgstr "Фінальна ціна"
+
+#: .\shop\models.py:47
+msgid "View Count"
+msgstr "Кількість переглядів"
 
 #: .\templates\about.html:4
 msgid "About us"
@@ -53,10 +192,6 @@ msgstr "Категорії"
 #: .\templates\base.html:31
 msgid "All products"
 msgstr "Всі товари"
-
-#: .\templates\base.html:36
-msgid "Cart"
-msgstr "Кошик"
 
 #: .\templates\base.html:39
 msgid "About"
@@ -107,34 +242,6 @@ msgstr "Оформити"
 msgid "Items in the cart"
 msgstr "Товари в кошику"
 
-#: .\templates\cart\checkout.html:15 .\templates\cart\my_cart.html:15
-#: .\templates\shop\product_detail.html:8
-msgid "Product"
-msgstr "Товар"
-
-#: .\templates\cart\checkout.html:16 .\templates\cart\my_cart.html:16
-#: .\templates\custom_admin\admin_order_detail.html:27
-#: .\templates\custom_user\customer_order_detail.html:25
-msgid "Rate"
-msgstr "Ціна"
-
-#: .\templates\cart\checkout.html:17 .\templates\cart\my_cart.html:17
-#: .\templates\custom_admin\admin_order_detail.html:28
-#: .\templates\custom_user\customer_order_detail.html:26
-msgid "Quantity"
-msgstr "Кількість"
-
-#: .\templates\cart\checkout.html:18 .\templates\cart\my_cart.html:18
-#: .\templates\custom_admin\admin_order_detail.html:29
-msgid "Subtotal"
-msgstr "Остаточна ціна"
-
-#: .\templates\cart\checkout.html:32 .\templates\cart\my_cart.html:46
-#: .\templates\custom_admin\admin_order_detail.html:45
-#: .\templates\custom_user\customer_order_detail.html:40
-msgid "Total"
-msgstr "Всього"
-
 #: .\templates\cart\checkout.html:37
 msgid "Update Cart"
 msgstr "Оновити кошик"
@@ -179,11 +286,6 @@ msgstr "Всі замовлення"
 msgid "Order ID"
 msgstr "ID замовлення"
 
-#: .\templates\custom_admin\admin_all_orders.html:16
-#: .\templates\custom_admin\admin_home.html:16
-msgid "Customer"
-msgstr "Покупець"
-
 #: .\templates\custom_admin\admin_all_orders.html:17
 #: .\templates\custom_admin\admin_home.html:17
 msgid "Ordered On"
@@ -220,10 +322,6 @@ msgstr "Додати новий товар"
 msgid "Product Title"
 msgstr "Назва товару"
 
-#: .\templates\custom_admin\admin_all_products.html:18
-msgid "Image"
-msgstr "Зображення"
-
 #: .\templates\custom_admin\admin_all_products.html:19
 #: .\templates\shop\product_detail.html:27
 msgid "Price"
@@ -239,13 +337,16 @@ msgid "Visit site"
 msgstr "Відвідати сайт"
 
 #: .\templates\custom_admin\admin_create_product.html:10
-#: .\templates\custom_admin\admin_home.html:4
 msgid "Add New product"
 msgstr "Додати новий товар"
 
 #: .\templates\custom_admin\admin_create_product.html:15
 msgid "Submit Data"
 msgstr "Підтвердити дані"
+
+#: .\templates\custom_admin\admin_home.html:4
+msgid "Admin Home"
+msgstr "Форма входу"
 
 #: .\templates\custom_admin\admin_home.html:10
 msgid "Pending Orders"
@@ -456,14 +557,6 @@ msgstr "Ласково просимо до мого e-commerce сайту"
 #: .\templates\shop\products.html:40
 msgid "Add To Cart"
 msgstr "Додати у кошик"
-
-#: .\templates\shop\product_detail.html:25
-msgid "Category"
-msgstr "Категорія"
-
-#: .\templates\shop\product_detail.html:30
-msgid "Warranty"
-msgstr "Гарантія"
 
 #: .\templates\shop\product_detail.html:31
 msgid "Return Policy"
