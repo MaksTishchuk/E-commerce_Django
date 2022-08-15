@@ -1,11 +1,12 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
+from modeltranslation.admin import TranslationAdmin
 
 from .models import Category, Product, ProductImage
 
 
 @admin.register(Category)
-class CategoryAdmin(admin.ModelAdmin):
+class CategoryAdmin(TranslationAdmin):
     """ Category in admin panel """
 
     prepopulated_fields = {'slug': ('title',)}
@@ -27,7 +28,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 @admin.register(Product)
-class ProductAdmin(admin.ModelAdmin):
+class ProductAdmin(TranslationAdmin):
     """ Product in admin panel """
 
     prepopulated_fields = {'slug': ('title',)}

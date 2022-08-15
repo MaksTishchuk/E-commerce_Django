@@ -7,7 +7,7 @@ from django.views.generic import TemplateView, ListView, DetailView, CreateView
 
 from .models import Customer, Cart, CartProduct, Order
 from shop.models import Product
-from .form import OrderForm
+from .forms import OrderForm
 from .mixins import CartMixin
 
 
