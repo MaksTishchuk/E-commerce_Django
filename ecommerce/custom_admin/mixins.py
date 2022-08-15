@@ -6,7 +6,8 @@ from custom_admin.models import AdminUser
 class AdminRequiredMixin(object):
     def dispatch(self, request, *args, **kwargs):
         if not (
-            request.user.is_authenticated and AdminUser.objects.filter(user=request.user).exists()
+            request.user.is_authenticated and
+            (AdminUser.objects.filter(user=request.user).exists() or request.user.is_staff)
         ):
             return redirect("custom-admin-login")
         return super().dispatch(request, *args, **kwargs)

@@ -22,7 +22,7 @@ class CustomAdminLoginView(FormView):
         username = form.cleaned_data.get('username')
         password = form.cleaned_data['password']
         user = authenticate(username=username, password=password)
-        if user is not None and AdminUser.objects.filter(user=user).exists():
+        if user and (AdminUser.objects.filter(user=user).exists() or user.is_staff):
             login(self.request, user)
         else:
             return render(
