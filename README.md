@@ -59,7 +59,10 @@
 ##### 8) Run server
 
     python manage.py runserver
-
+    
+##### 9) Commands for update locale:
+    django-admin makemessages --locale=uk --symlinks
+    django-admin compilemessages
 
 
 Copyright (c) 2022-present, Tishchyk Maksym
