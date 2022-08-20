@@ -9,14 +9,17 @@
     <hr>
     <div class="row mt-3 mb-5">
         {% for product in product_list %}
-        <div class="col-md-3 card" style="text-align: center;">
+        <div class="col-md-3 card product_data" style="text-align: center;">
             <div class="m-4">
                 <h4><a href="{% url 'product-detail' product.slug %}">{{ product.title }}</a></h4>
                 <img src="{{ product.image.url }}" alt="" class="img-fluid" style="height: 200px; object-fit: contain;">
                 <p class="mt-2"><a class="dropdown-item" href="{% url 'category-list' product.category.slug %}">{{ product.category }}</a></p>
                 <p><strike>{{ product.market_price }}$</strike> {{ product.selling_price }}$</p>
                 <p><small>{% trans "Views" %}: {{ product.view_count }}</small></p>
-                <a href="{% url 'add-to-card' product.id %}" class="btn btn-primary">{% trans "Add To Cart" %}</a>
+
+                {% csrf_token %}
+                <a href="" class="btn btn-primary add-to-cart">{% trans "Add To Cart" %}</a>
+                <input type="hidden" value="{{ product.id }}" class="prod_id">
             </div>
         </div>
         {% endfor %}

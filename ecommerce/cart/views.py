@@ -1,6 +1,7 @@
 from django.db.models import F
-from django.http import HttpResponseRedirect, Http404
+from django.http import HttpResponseRedirect, Http404, JsonResponse
 from django.shortcuts import get_object_or_404, redirect
+from django.template.loader import render_to_string
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import TemplateView, ListView, DetailView, CreateView
@@ -11,13 +12,13 @@ from .forms import OrderForm
 from .mixins import CartMixin
 
 
-class AddToCartView(CartMixin, View):
-    """ Add to cart view """
+def add_to_cart_ajax(request):
+    """ Add to cart with ajax """
 
-    def get(self, request, *args, **kwargs):
-        product_id = self.kwargs['prod_id']
+    if request.method == 'POST':
+        product_id = int(request.POST.get('prod_id'))
         product = get_object_or_404(Product, id=product_id)
-        cart_id = self.request.session.get('cart_id', None)
+        cart_id = request.session.get('cart_id', None)
         if cart_id:
             cart = Cart.objects.filter(id=cart_id).last()
             this_cart_product = cart.cartproduct_set.filter(product=product)
@@ -37,14 +38,15 @@ class AddToCartView(CartMixin, View):
                 cart.save()
         else:
             cart = Cart.objects.create(final_price=0)
-            self.request.session['cart_id'] = cart.id
+            request.session['cart_id'] = cart.id
             cart_product = CartProduct.objects.create(
                 cart=cart, product=product, rate=product.selling_price, quantity=1,
                 subtotal=product.selling_price
             )
             cart.final_price += product.selling_price
             cart.save()
-        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+        return JsonResponse({'status': 'Product added successfully'})
+    return redirect('home')
 
 
 class MyCartView(CartMixin, TemplateView):
@@ -64,12 +66,12 @@ class MyCartView(CartMixin, TemplateView):
         return context
 
 
-class ManageCartView(CartMixin, View):
-    """ Manage cart products """
+def manage_cart_ajax(request):
+    """ Manage cart with ajax """
 
-    def get(self, request, *args, **kwargs):
-        cart_product_id = self.kwargs['cartprod_id']
-        action = request.GET.get('action')
+    if request.method == 'POST':
+        cart_product_id = int(request.POST.get('prod_id'))
+        action = request.POST.get('action')
         cart_product = CartProduct.objects.filter(
             id=cart_product_id).select_related('cart', 'product').last()
         cart = cart_product.cart
@@ -79,21 +81,36 @@ class ManageCartView(CartMixin, View):
             cart_product.save()
             cart.final_price += cart_product.rate
             cart.save()
+            data = {
+                'quantity': cart_product.quantity,
+                'subtotal': cart_product.subtotal,
+                'final_price': cart.final_price,
+            }
+            return JsonResponse({'status': 'Increment quantity', 'data': data})
         elif action == 'decrement':
-            cart_product.quantity -= 1
-            cart_product.subtotal -= cart_product.rate
-            cart_product.save()
-            cart.final_price -= cart_product.rate
-            cart.save()
-            if cart_product.quantity < 1:
-                cart_product.delete()
+            if cart_product.quantity > 1:
+                cart_product.quantity -= 1
+                cart_product.subtotal -= cart_product.rate
+                cart_product.save()
+                cart.final_price -= cart_product.rate
+                cart.save()
+                data = {
+                    'quantity': cart_product.quantity,
+                    'subtotal': cart_product.subtotal,
+                    'final_price': cart.final_price,
+                }
+                return JsonResponse({'status': 'Decrement quantity', 'data': data})
         elif action == 'remove':
             cart.final_price -= cart_product.subtotal
             cart.save()
             cart_product.delete()
+            data = {
+                'final_price': cart.final_price,
+            }
+            return JsonResponse({'status': 'Delete product', 'data': data})
         else:
-            raise Http404()
-        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+            return JsonResponse({'status': 'Invalid action'})
+    return redirect('home')
 
 
 class ClearCartView(CartMixin, View):

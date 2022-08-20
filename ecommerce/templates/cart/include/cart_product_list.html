@@ -1,0 +1,41 @@
+{% load i18n %}
+{% for cart_product in cart_products %}
+<tr class="text-center prod_info" id="product_{{ cart_product.id }}">
+    <td class="text-left">{{ cart_product.product.title }}</td>
+    <td>{{ cart_product.rate }}</td>
+    <td>
+        {% csrf_token %}
+        <a href="" class="decr_prod">
+            <input type="hidden" value="{{ cart_product.id }}" class="prod_id">
+            <b>-</b>
+        </a>
+        <b id="quantity_{{ cart_product.id }}">{{ cart_product.quantity }}</b>
+        <a href="" class="incr_prod">
+            <input type="hidden" value="{{ cart_product.id }}" class="prod_id">
+            <b>+</b>
+        </a>
+    </td>
+    <td><b id="subtotal_{{ cart_product.id }}">{{ cart_product.subtotal }}</b></td>
+    <td>
+        <a href="" class="btn btn-danger remove_prod">
+            <input type="hidden" value="{{ cart_product.id }}" class="prod_id">
+            <b>x</b>
+        </a>
+    </td>
+</tr>
+{% endfor %}
+<tr>
+    {% if cart_products %}
+    <th colspan="3" class="text-leftr">{% trans "Total" %}</th>
+    <th class="text-center"><b id="final_price">{{ final_price }}</b>$</th>
+    <th class="text-center"><a href="{% url 'clear-cart' %}">{% trans "Clear Cart" %}</a></th>
+    {% else %}
+    <th colspan="3" class="text-leftr">{% trans "Total" %}</th>
+    <th class="text-center"><b>0.00</b>$</th>
+    {% endif %}
+</tr>
+{% if cart_products %}
+<tr>
+    <th><a class="btn btn-primary" href="{% url 'checkout' %}">{% trans "Checkout" %}</a></th>
+</tr>
+{% endif %}

@@ -6,12 +6,11 @@
 {% block content %}
 <div class="container">
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-10">
             <h4>{% trans "Items in my cart" %}</h4><hr>
-            <table class="table">
+            <table class="table cart_data">
                 <thead>
-                    <tr>
-                        <th>№</th>
+                    <tr class="text-center">
                         <th>{% trans "Product" %}</th>
                         <th>{% trans "Rate" %}</th>
                         <th>{% trans "Quantity" %}</th>
@@ -19,41 +18,8 @@
                         <th>{% trans "Delete" %}</th>
                     </tr>
                 </thead>
-                <tbody>
-                    {% for cart_product in cart_products %}
-                    <tr>
-                        <td>{{ forloop.counter }}</td>
-                        <td>{{ cart_product.product.title }}</td>
-                        <td>{{ cart_product.rate }}</td>
-                        <td>
-                            <a href="{% url 'manage-cart' cart_product.id %}?action=decrement">
-                                <b>-</b>
-                            </a>
-                                {{ cart_product.quantity }}
-                            <a href="{% url 'manage-cart' cart_product.id %}?action=increment">
-                                <b>+</b>
-                            </a>
-                        </td>
-                        <td>{{ cart_product.subtotal }}</td>
-                        <td>
-                            <a href="{% url 'manage-cart' cart_product.id %}?action=remove" class="btn btn-danger">
-                                <b>x</b>
-                            </a>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                    <tr>
-                        <th colspan="4" class="text-right">{% trans "Total" %}</th>
-                            <th>{{ final_price }}$</th>
-                        {% if cart_products %}
-                            <th><a href="{% url 'clear-cart' %}">{% trans "Clear Cart" %}</a></th>
-                        {% endif %}
-                    </tr>
-                    {% if cart_products %}
-                    <tr>
-                        <th><a class="btn btn-primary" href="{% url 'checkout' %}">{% trans "Checkout" %}</a></th>
-                    </tr>
-                    {% endif %}
+                <tbody id="tbody">
+                    {% include 'cart/include/cart_product_list.html' %}
                 </tbody>
             </table>
         </div>

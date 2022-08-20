@@ -20,13 +20,17 @@
             </div>
 
         </div>
-        <div class="col-md-8">
+        <div class="col-md-8 product_data">
             <h4>{{ product.title }}</h4>
             <h5>{% trans "Category" %}: {{ product.category }}</h5>
             <p>{% trans "Views" %}: {{ product.view_count }}</p>
             <h5>{% trans "Price" %}: <strike>{{ product.market_price }}$</strike> {{ product.selling_price }}$</h5>
-            <a href="{% url 'add-to-card' product.id %}" class="btn btn-primary">{% trans "Add To Cart" %}</a>
+
+            {% csrf_token %}
+            <a href="" class="btn btn-primary add-to-cart">{% trans "Add To Cart" %}</a>
+            <input type="hidden" value="{{ product.id }}" class="prod_id">
             <hr>
+
             <p class="text-info">{% trans "Warranty" %}: {{ product.warranty }}</p>
             <p class="text-info">{% trans "Return Policy" %}: {{ product.return_policy }}</p>
             <hr>
