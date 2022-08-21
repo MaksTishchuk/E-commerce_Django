@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'django_filters',
     'bootstrapform',
+    'captcha',
 
     'shop.apps.ShopConfig',
     'cart.apps.CartConfig',
@@ -171,3 +172,7 @@ EMAIL_HOST = os.getenv("EMAIL_HOST", None)
 EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER", None)
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD", None)
 EMAIL_PORT = os.getenv("EMAIL_PORT", None)
+
+
+RECAPTCHA_PUBLIC_KEY = os.getenv('RECAPTCHA_PUBLIC_KEY')
+RECAPTCHA_PRIVATE_KEY = os.getenv('RECAPTCHA_PRIVATE_KEY')

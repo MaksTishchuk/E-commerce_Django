@@ -1,5 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
+from captcha.fields import ReCaptchaField
+from captcha.widgets import ReCaptchaV2Checkbox
 
 from cart.models import Customer
 
@@ -10,6 +12,7 @@ class CustomerRegistrationForm(forms.ModelForm):
     username = forms.CharField(widget=forms.TextInput())
     password = forms.CharField(widget=forms.PasswordInput())
     email = forms.CharField(widget=forms.EmailInput())
+    captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox())
 
     class Meta:
         model = Customer
@@ -33,6 +36,7 @@ class CustomerLoginForm(forms.Form):
 
     username = forms.CharField(widget=forms.TextInput())
     password = forms.CharField(widget=forms.PasswordInput())
+    captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox())
 
 
 class ForgotPasswordForm(forms.Form):
@@ -42,6 +46,7 @@ class ForgotPasswordForm(forms.Form):
         'class': 'form-control',
         'placeholder': 'Enter the email used in customer account..'
     }))
+    captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox())
 
     def clean_email(self):
         email = self.cleaned_data.get('email')
@@ -63,6 +68,7 @@ class ResetPasswordForm(forms.Form):
         'autocomplete': 'new-password',
         'placeholder': 'Confirm New Password',
     }), label="Confirm New Password")
+    captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox())
 
     def clean_confirm_new_password(self):
         new_password = self.cleaned_data.get("new_password")

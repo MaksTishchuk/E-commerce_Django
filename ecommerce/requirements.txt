@@ -13,6 +13,7 @@ django-bootstrap-form==3.4
 django-debug-toolbar==3.5.0
 django-filter==22.1
 django-modeltranslation==0.18.4
+django-recaptcha==3.0.0
 future==0.18.2
 html5lib==1.1
 idna==3.3

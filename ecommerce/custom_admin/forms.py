@@ -1,3 +1,5 @@
+from captcha.fields import ReCaptchaField
+from captcha.widgets import ReCaptchaV2Checkbox
 from django import forms
 
 from shop.models import Product
@@ -8,6 +10,7 @@ class CustomAdminLoginForm(forms.Form):
 
     username = forms.CharField(widget=forms.TextInput())
     password = forms.CharField(widget=forms.PasswordInput())
+    captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox())
 
 
 class CustomAdminCreateProductForm(forms.ModelForm):
