@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.core.mail import send_mail
@@ -8,6 +9,7 @@ from django.template.loader import get_template
 from django.urls import reverse_lazy, reverse
 from django.views import View
 from django.views.generic import CreateView, FormView, TemplateView, DetailView, UpdateView
+from django.contrib.messages.views import SuccessMessageMixin
 from xhtml2pdf import pisa
 
 from cart.models import Order, CartProduct, Cart, Customer
@@ -18,12 +20,13 @@ from custom_user.forms import (
 from custom_user.utils import password_reset_token
 
 
-class CustomerRegistrationView(CreateView):
+class CustomerRegistrationView(SuccessMessageMixin, CreateView):
     """ View for registration customer """
 
     template_name = 'custom_user/customer_registration.html'
     form_class = CustomerRegistrationForm
     success_url = reverse_lazy('customer-login')
+    success_message = "Customer registration completed successfully!"
 
     def form_valid(self, form):
         username = form.cleaned_data.get('username')
@@ -35,12 +38,13 @@ class CustomerRegistrationView(CreateView):
         return super().form_valid(form)
 
 
-class CustomerLoginView(FormView):
+class CustomerLoginView(SuccessMessageMixin, FormView):
     """ View for login customer """
 
     template_name = 'custom_user/customer_login.html'
     form_class = CustomerLoginForm
     success_url = reverse_lazy('home')
+    success_message = "%(username)s login completed successfully!"
 
     def form_valid(self, form):
         username = form.cleaned_data.get('username')
@@ -57,11 +61,12 @@ class CustomerLoginView(FormView):
         return super().form_valid(form)
 
 
-class CustomerLogoutView(View):
+class CustomerLogoutView(SuccessMessageMixin, View):
     """ View for logout customer """
 
     def get(self, request):
         logout(request)
+        messages.success(self.request, "Logout completed successfully!")
         return redirect('home')
 
 
@@ -87,13 +92,14 @@ class CustomerProfileView(TemplateView):
         return context
 
 
-class CustomerUpdateProfileView(UpdateView):
+class CustomerUpdateProfileView(SuccessMessageMixin, UpdateView):
     """ Customer profile update view """
 
     model = Customer
     form_class = CustomerUpdateProfileForm
     template_name = 'custom_user/customer_update_profile.html'
     success_url = reverse_lazy('customer-profile')
+    success_message = "Update profile completed successfully!"
 
 
 class CustomerOrderDetailView(DetailView):
@@ -137,12 +143,13 @@ class CustomerForgotPasswordView(FormView):
         return super().form_valid(form)
 
 
-class CustomerResetPasswordView(FormView):
+class CustomerResetPasswordView(SuccessMessageMixin, FormView):
     """ Reset password view """
 
     template_name = 'custom_user/reset_password.html'
     form_class = ResetPasswordForm
     success_url = reverse_lazy('customer-login')
+    success_message = "Reset password completed successfully!"
 
     def dispatch(self, request, *args, **kwargs):
         email = self.kwargs.get("email")

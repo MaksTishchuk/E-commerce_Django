@@ -1,0 +1,11 @@
+<ul id="message" class="messages" style="text-align: center">
+    {% for message in messages %}
+    <li class="alert alert-success"
+        style="list-style-type: none; display: inline-block; vertical-align: top; text-align: center">
+        {{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="margin-left: 5px;">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </li>
+    {% endfor %}
+</ul>

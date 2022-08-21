@@ -1,12 +1,11 @@
-from django.db.models import F
-from django.http import HttpResponseRedirect, Http404, JsonResponse
+from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.template.loader import render_to_string
 from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import TemplateView, ListView, DetailView, CreateView
+from django.views.generic import TemplateView, CreateView
 
-from .models import Customer, Cart, CartProduct, Order
+from .models import Cart, CartProduct
 from shop.models import Product
 from .forms import OrderForm
 from .mixins import CartMixin
@@ -45,7 +44,10 @@ def add_to_cart_ajax(request):
             )
             cart.final_price += product.selling_price
             cart.save()
-        return JsonResponse({'status': 'Product added successfully'})
+        message = ['Item added to cart!']
+        return JsonResponse(
+            {'html': render_to_string('include/messages.html', {'messages': message})}
+        )
     return redirect('home')
 
 
@@ -107,7 +109,14 @@ def manage_cart_ajax(request):
             data = {
                 'final_price': cart.final_price,
             }
-            return JsonResponse({'status': 'Delete product', 'data': data})
+            message = ['Item deleted from cart!']
+            return JsonResponse(
+                {
+                    'status': 'Delete product',
+                    'data': data,
+                    'html': render_to_string('include/messages.html', {'messages': message})
+                }
+            )
         else:
             return JsonResponse({'status': 'Invalid action'})
     return redirect('home')

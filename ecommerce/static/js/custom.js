@@ -13,6 +13,7 @@ $(document).ready(function () {
             },
             dataType: "json",
             success: function (response) {
+                $('#message').replaceWith($(response.html));
             }
         })
     });
@@ -86,6 +87,7 @@ $(document).ready(function () {
                 $('#product_' + product_id).remove();
                 var final_price = response.data.final_price
                 $('#final_price').html(final_price);
+                $('#message').replaceWith($(response.html));
             }
         });
     });

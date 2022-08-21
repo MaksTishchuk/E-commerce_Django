@@ -85,8 +85,6 @@
                     {% endif %}
                     </div>
                 </li>
-
-
             </ul>
             <form class="form-inline my-2 my-lg-0 mr-4" action="{% url 'search' %}" method="GET">
             <input name="query" class="form-control mr-sm-2" type="search" placeholder="Search"
@@ -96,6 +94,8 @@
         </div>
         </nav>
     <div style="margin-top: 80px;"></div>
+
+    {% include 'include/messages.html' %}
     {% block content %}
     {% endblock %}
 
