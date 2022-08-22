@@ -36,6 +36,10 @@
 </tr>
 {% if cart_products %}
 <tr>
-    <th><a class="btn btn-primary" href="{% url 'checkout' %}">{% trans "Checkout" %}</a></th>
+    <th>
+        <a class="btn btn-primary" id="checkout" href="{% url 'checkout' %}">
+            {% trans "Checkout" %}
+        </a>
+    </th>
 </tr>
 {% endif %}

@@ -88,7 +88,28 @@ $(document).ready(function () {
                 var final_price = response.data.final_price
                 $('#final_price').html(final_price);
                 $('#message').replaceWith($(response.html));
+                if (final_price == 0) {
+                    $('#checkout').remove();
+                }
             }
         });
     });
+
+    $('.product-favourite').click(function(e) {
+        e.preventDefault()
+        const product_id = $(this).closest('.product_data').find('.prod_id').val();
+        const token = $('input[name=csrfmiddlewaretoken]').val();
+        $.ajax({
+            type: "POST",
+            url: "/product/add-to-favourite",
+            data: {
+                'prod_id': product_id,
+                csrfmiddlewaretoken: token
+            },
+            dataType: "json",
+            success: function (response) {
+                $('#favourite').replaceWith($(response.html));
+            },
+        })
+    })
 })

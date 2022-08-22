@@ -2,6 +2,8 @@ from django.db import models
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
+from custom_user.models import Customer
+
 
 class Category(models.Model):
     """ Model Category """
@@ -45,9 +47,19 @@ class Product(models.Model):
         max_digits=8, decimal_places=2, default=0, verbose_name=_('Selling Price')
     )
     view_count = models.PositiveIntegerField(default=0, verbose_name=_('View Count'))
+    favourite = models.ManyToManyField(
+        Customer,
+        related_name='customers_favourite',
+        default=None,
+        blank=True,
+        verbose_name='Favourite'
+    )
 
     def get_absolute_url(self):
         return reverse('product-detail', kwargs={'slug': self.slug})
+
+    def get_favourite_count(self):
+        return self.favourite.count()
 
     def __str__(self):
         return self.title

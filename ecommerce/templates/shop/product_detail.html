@@ -28,6 +28,9 @@
 
             {% csrf_token %}
             <a href="" class="btn btn-primary add-to-cart">{% trans "Add To Cart" %}</a>
+            <a href="" class="btn btn-primary product-favourite">
+                {% include 'shop/include/favourite.html' %}
+            </a>
             <input type="hidden" value="{{ product.id }}" class="prod_id">
             <hr>
 

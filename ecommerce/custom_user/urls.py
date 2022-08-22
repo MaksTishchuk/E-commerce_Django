@@ -26,4 +26,5 @@ urlpatterns = [
         'my-profile/order/<int:pk>', views.CustomerOrderDetailView.as_view(), name='order-detail'
     ),
     path('make-order-pdf/<int:pk>/', views.make_order_pdf, name='customer-make-pdf'),
+    path('favourite-products/', views.FavouriteProductsView.as_view(), name='favourite-products')
 ]

@@ -73,6 +73,7 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="{% url 'customer-profile' %}">{% trans "My Profile" %}</a>
+                        <a class="dropdown-item" href="{% url 'favourite-products' %}">{% trans "Favourite products" %}</a>
                         <a class="dropdown-item" href="{% url 'customer-logout' %}">{% trans "Logout" %}</a>
                     </div>
                     {% else %}

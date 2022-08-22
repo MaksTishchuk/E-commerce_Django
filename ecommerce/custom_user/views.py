@@ -8,16 +8,20 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.template.loader import get_template
 from django.urls import reverse_lazy, reverse
 from django.views import View
-from django.views.generic import CreateView, FormView, TemplateView, DetailView, UpdateView
+from django.views.generic import CreateView, FormView, TemplateView, DetailView, UpdateView, \
+    ListView
 from django.contrib.messages.views import SuccessMessageMixin
 from xhtml2pdf import pisa
 
+from cart.mixins import CartMixin
 from cart.models import Order, CartProduct, Cart, Customer
 from custom_user.forms import (
     CustomerRegistrationForm, CustomerLoginForm, ForgotPasswordForm, ResetPasswordForm,
     CustomerUpdateProfileForm
 )
 from custom_user.utils import password_reset_token
+from shop.models import Product
+from shop.views import AllProductsView
 
 
 class CustomerRegistrationView(SuccessMessageMixin, CreateView):
@@ -50,7 +54,7 @@ class CustomerLoginView(SuccessMessageMixin, FormView):
         username = form.cleaned_data.get('username')
         password = form.cleaned_data['password']
         user = authenticate(username=username, password=password)
-        if user is not None and Customer.objects.filter(user=user).exists():
+        if user is not None and (Customer.objects.filter(user=user).exists() or user.is_staff):
             login(self.request, user)
         else:
             return render(
@@ -181,3 +185,17 @@ def make_order_pdf(request, pk):
     if pisa_status.err:
         return HttpResponse('We had some errors <pre>' + html + '</pre>')
     return response
+
+
+class FavouriteProductsView(AllProductsView):
+    """ View customer's favourite products """
+
+    def get_queryset(self):
+        return Product.objects.filter(
+            favourite=self.request.user.customer
+        ).select_related('category')
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Favourite Products'
+        return context

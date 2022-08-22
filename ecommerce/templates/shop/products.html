@@ -7,6 +7,8 @@
         {{ this_cat }}
     {% elif query %}
         {% trans "Search result" %}
+    {% elif title %}
+        {{ title }}
     {% else %}
         {% trans "All Products" %}
     {% endif %}
@@ -18,6 +20,8 @@
         <h1 class="text-center">{{ this_cat }}</h1>
     {% elif query %}
         <h1 class="text-center">{% trans "Search result for" %} "{{ query }}"</h1>
+    {% elif title %}
+        <h1 class="text-center">{{ title }}</h1>
     {% else %}
         <h1 class="text-center">{% trans "All Products" %}</h1>
     {% endif %}
