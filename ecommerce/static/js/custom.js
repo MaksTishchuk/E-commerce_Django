@@ -33,14 +33,19 @@ $(document).ready(function () {
             },
             dataType: "json",
             success: function (response) {
-                var quantity = response.data.quantity
-                var subtotal = response.data.subtotal
-                var final_price = response.data.final_price
-                var quantity_id = '#quantity_'+product_id
-                var subtotal_id = '#subtotal_'+product_id
-                $(quantity_id).html(quantity);
-                $(subtotal_id).html(subtotal);
-                $('#final_price').html(final_price);
+                if (response.data == undefined) {
+                    $('#message').replaceWith($(response.html));
+                }
+                else {
+                    var quantity = response.data.quantity
+                    var subtotal = response.data.subtotal
+                    var final_price = response.data.final_price
+                    var quantity_id = '#quantity_'+product_id
+                    var subtotal_id = '#subtotal_'+product_id
+                    $(quantity_id).html(quantity);
+                    $(subtotal_id).html(subtotal);
+                    $('#final_price').html(final_price);
+                }
             }
         })
     });
@@ -59,14 +64,19 @@ $(document).ready(function () {
             },
             dataType: "json",
             success: function (response) {
-                var quantity = response.data.quantity
-                var subtotal = response.data.subtotal
-                var final_price = response.data.final_price
-                var quantity_id = '#quantity_'+product_id
-                var subtotal_id = '#subtotal_'+product_id
-                $(quantity_id).html(quantity);
-                $(subtotal_id).html(subtotal);
-                $('#final_price').html(final_price);
+                if (response.data == undefined) {
+                    $('#message').replaceWith($(response.html));
+                }
+                else {
+                    var quantity = response.data.quantity
+                    var subtotal = response.data.subtotal
+                    var final_price = response.data.final_price
+                    var quantity_id = '#quantity_' + product_id
+                    var subtotal_id = '#subtotal_' + product_id
+                    $(quantity_id).html(quantity);
+                    $(subtotal_id).html(subtotal);
+                    $('#final_price').html(final_price);
+                }
             }
         })
     });

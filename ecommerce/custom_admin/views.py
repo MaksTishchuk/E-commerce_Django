@@ -2,7 +2,8 @@ from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import TemplateView, FormView, DetailView, ListView, CreateView
+from django.views.generic import TemplateView, FormView, DetailView, ListView, CreateView, \
+    UpdateView, DeleteView
 
 from cart.models import Order
 from shop.models import Product, ProductImage
@@ -103,3 +104,20 @@ class CustomAdminAddProductView(AdminRequiredMixin, CreateView):
         for image in images:
             ProductImage.objects.create(product=product, image=image)
         return super().form_valid(form)
+
+
+class CustomAdminEditProductView(AdminRequiredMixin, UpdateView):
+    """ Custom admin edit product """
+
+    model = Product
+    form_class = CustomAdminCreateProductForm
+    template_name = 'custom_admin/admin_create_product.html'
+    success_url = reverse_lazy('custom-admin-all-products')
+
+
+class CustomAdminDeleteProductView(AdminRequiredMixin, DeleteView):
+    """ Custom admin delete product """
+
+    model = Product
+    template_name = 'custom_admin/admin_delete_product.html'
+    success_url = reverse_lazy('custom-admin-all-products')

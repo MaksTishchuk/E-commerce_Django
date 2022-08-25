@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.template.loader import render_to_string
@@ -17,37 +18,51 @@ def add_to_cart_ajax(request):
     if request.method == 'POST':
         product_id = int(request.POST.get('prod_id'))
         product = get_object_or_404(Product, id=product_id)
-        cart_id = request.session.get('cart_id', None)
-        if cart_id:
-            cart = Cart.objects.filter(id=cart_id).last()
-            this_cart_product = cart.cartproduct_set.filter(product=product)
-            if this_cart_product.exists():
-                cart_product = this_cart_product.last()
-                cart_product.quantity += 1
-                cart_product.subtotal = cart_product.quantity * product.selling_price
-                cart_product.save()
-                cart.final_price += product.selling_price
-                cart.save()
+        if product.quantity > 0:
+            cart_id = request.session.get('cart_id', None)
+            if cart_id:
+                cart = Cart.objects.filter(id=cart_id).last()
+                this_cart_product = cart.cartproduct_set.filter(product=product)
+                if this_cart_product.exists():
+                    cart_product = this_cart_product.last()
+                    if (cart_product.quantity + 1) <= product.quantity:
+                        cart_product.quantity += 1
+                        cart_product.subtotal = cart_product.quantity * product.selling_price
+                        cart_product.save()
+                        cart.final_price += product.selling_price
+                        cart.save()
+                    else:
+                        message = ['The maximum quantity of items in stock has been reached!']
+                        return JsonResponse(
+                            {'html': render_to_string(
+                                'include/messages.html', {'messages': message}
+                            )}
+                        )
+                else:
+                    cart_product = CartProduct.objects.create(
+                        cart=cart, product=product, rate=product.selling_price, quantity=1,
+                        subtotal=product.selling_price
+                    )
+                    cart.final_price += product.selling_price
+                    cart.save()
             else:
+                cart = Cart.objects.create(final_price=0)
+                request.session['cart_id'] = cart.id
                 cart_product = CartProduct.objects.create(
                     cart=cart, product=product, rate=product.selling_price, quantity=1,
                     subtotal=product.selling_price
                 )
                 cart.final_price += product.selling_price
                 cart.save()
-        else:
-            cart = Cart.objects.create(final_price=0)
-            request.session['cart_id'] = cart.id
-            cart_product = CartProduct.objects.create(
-                cart=cart, product=product, rate=product.selling_price, quantity=1,
-                subtotal=product.selling_price
+            message = ['Item added to cart!']
+            return JsonResponse(
+                {'html': render_to_string('include/messages.html', {'messages': message})}
             )
-            cart.final_price += product.selling_price
-            cart.save()
-        message = ['Item added to cart!']
-        return JsonResponse(
-            {'html': render_to_string('include/messages.html', {'messages': message})}
-        )
+        else:
+            message = ['Item is out of stock!']
+            return JsonResponse(
+                {'html': render_to_string('include/messages.html', {'messages': message})}
+            )
     return redirect('home')
 
 
@@ -56,12 +71,31 @@ class MyCartView(CartMixin, TemplateView):
 
     template_name = 'cart/my_cart.html'
 
+    def dispatch(self, request, *args, **kwargs):
+        cart_id = self.request.session.get('cart_id', None)
+        cart_products = CartProduct.objects.filter(
+            cart=cart_id
+        ).select_related('product', 'cart').order_by('id')
+        for cart_product in cart_products:
+            if cart_product.quantity > cart_product.product.quantity:
+                cart_product.cart.final_price -= (
+                        cart_product.quantity - cart_product.product.quantity) * cart_product.rate
+                cart_product.quantity = cart_product.product.quantity
+                cart_product.subtotal = cart_product.quantity * cart_product.rate
+                cart_product.save()
+                cart_product.cart.save()
+        return super().dispatch(request, *args, **kwargs)
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         cart_id = self.request.session.get('cart_id', None)
         cart_products = CartProduct.objects.filter(
             cart=cart_id
         ).select_related('product', 'cart').order_by('id')
+        for cart_product in cart_products:
+            if cart_product.quantity > cart_product.product.quantity:
+                cart_product.quantity = cart_product.product.quantity
+                cart_product.save()
         context['cart_products'] = cart_products
         if cart_products:
             context['final_price'] = cart_products[0].cart.final_price
@@ -76,19 +110,26 @@ def manage_cart_ajax(request):
         action = request.POST.get('action')
         cart_product = CartProduct.objects.filter(
             id=cart_product_id).select_related('cart', 'product').last()
+        product = cart_product.product
         cart = cart_product.cart
         if action == 'increment':
-            cart_product.quantity += 1
-            cart_product.subtotal += cart_product.rate
-            cart_product.save()
-            cart.final_price += cart_product.rate
-            cart.save()
-            data = {
-                'quantity': cart_product.quantity,
-                'subtotal': cart_product.subtotal,
-                'final_price': cart.final_price,
-            }
-            return JsonResponse({'status': 'Increment quantity', 'data': data})
+            if (cart_product.quantity + 1) <= product.quantity:
+                cart_product.quantity += 1
+                cart_product.subtotal += cart_product.rate
+                cart_product.save()
+                cart.final_price += cart_product.rate
+                cart.save()
+                data = {
+                    'quantity': cart_product.quantity,
+                    'subtotal': cart_product.subtotal,
+                    'final_price': cart.final_price,
+                }
+                return JsonResponse({'status': 'Increment quantity', 'data': data})
+            else:
+                message = ['The maximum quantity of item in stock has been reached!']
+                return JsonResponse(
+                    {'html': render_to_string('include/messages.html', {'messages': message})}
+                )
         elif action == 'decrement':
             if cart_product.quantity > 1:
                 cart_product.quantity -= 1
@@ -102,6 +143,11 @@ def manage_cart_ajax(request):
                     'final_price': cart.final_price,
                 }
                 return JsonResponse({'status': 'Decrement quantity', 'data': data})
+            else:
+                message = ['The minimum quantity of item has been reached!']
+                return JsonResponse(
+                    {'html': render_to_string('include/messages.html', {'messages': message})}
+                )
         elif action == 'remove':
             cart.final_price -= cart_product.subtotal
             cart.save()
@@ -148,7 +194,9 @@ class CheckoutView(CartMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         cart_id = self.request.session.get('cart_id', None)
-        cart_products = CartProduct.objects.filter(cart=cart_id).select_related('cart', 'product')
+        cart_products = CartProduct.objects.filter(
+            cart=cart_id, quantity__gt=0
+        ).select_related('cart', 'product')
         context['cart_products'] = cart_products.order_by('id')
         cart = Cart.objects.filter(id=cart_id).select_related('customer').last()
         if cart:
@@ -166,6 +214,18 @@ class CheckoutView(CartMixin, CreateView):
         cart_id = self.request.session.get('cart_id', None)
         if cart_id:
             cart = Cart.objects.filter(id=cart_id).last()
+            cart_products = CartProduct.objects.filter(cart=cart)
+            for cart_product in cart_products:
+                product = cart_product.product
+                if (product.quantity - cart_product.quantity) < 0:
+                    messages.success(
+                        self.request, "The quantity of products in order exceeds products in stock!"
+                    )
+                    return redirect('my-cart')
+            for cart_product in cart_products:
+                product = cart_product.product
+                product.quantity -= cart_product.quantity
+                product.save()
             form.instance.cart = cart
             form.instance.subtotal = cart.final_price
             form.instance.discount = 0

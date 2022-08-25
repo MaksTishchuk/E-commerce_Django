@@ -24,8 +24,8 @@ class CustomAdminCreateProductForm(forms.ModelForm):
     class Meta:
         model = Product
         fields = ["title_en", "title_uk", "slug", "category", "image", "market_price",
-                  "selling_price", "description_en", "description_uk", "warranty_en",
-                  "warranty_uk", "return_policy_en", "return_policy_uk"]
+                  "selling_price", "quantity", "description_en", "description_uk",
+                  "warranty_en", "warranty_uk", "return_policy_en", "return_policy_uk"]
         widgets = {
             "title_en": forms.TextInput(attrs={
                 "class": "form-control",
@@ -52,6 +52,10 @@ class CustomAdminCreateProductForm(forms.ModelForm):
             "selling_price": forms.NumberInput(attrs={
                 "class": "form-control",
                 "placeholder": "Selling price of the product..."
+            }),
+            "quantity": forms.NumberInput(attrs={
+                "class": "form-control",
+                "placeholder": "Quantity of the product..."
             }),
             "description_en": forms.Textarea(attrs={
                 "class": "form-control",

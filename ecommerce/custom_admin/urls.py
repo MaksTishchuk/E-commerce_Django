@@ -16,5 +16,17 @@ urlpatterns = [
         views.CustomAdminAllProductsView.as_view(),
         name='custom-admin-all-products'
     ),
-    path('add-product/', views.CustomAdminAddProductView.as_view(), name='custom-admin-add-product')
+    path(
+        'add-product/', views.CustomAdminAddProductView.as_view(), name='custom-admin-add-product'
+    ),
+    path(
+        'edit-product/<int:pk>/',
+        views.CustomAdminEditProductView.as_view(),
+        name='custom-admin-edit-product'
+    ),
+    path(
+        'delete-product/<int:pk>/',
+        views.CustomAdminDeleteProductView.as_view(),
+        name='custom-admin-delete-product'
+    )
 ]

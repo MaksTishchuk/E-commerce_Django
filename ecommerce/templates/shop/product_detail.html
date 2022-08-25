@@ -24,11 +24,19 @@
             <h4>{{ product.title }}</h4>
             <h5>{% trans "Category" %}: {{ product.category }}</h5>
             <p>{% trans "Views" %}: {{ product.view_count }}</p>
-            <h5>{% trans "Price" %}: <strike>{{ product.market_price }}$</strike> {{ product.selling_price }}$</h5>
+            <p>{% trans "Items in stock" %}: {{ product.quantity }}</p>
 
             {% csrf_token %}
+            {% if product.quantity > 0 %}
+            <h5>{% trans "Price" %}: <strike>{{ product.market_price }}$</strike> {{ product.selling_price }}$</h5>
             <a href="" class="btn btn-primary add-to-cart">{% trans "Add To Cart" %}</a>
-            <a href="" class="btn btn-primary product-favourite">
+            {% else %}
+            <h5 style="background-color: lightgrey; list-style-type: none; display: inline-block; vertical-align: top; padding: 10px;">
+                {% trans "Item is out of stock" %}
+            </h5>
+            {% endif %}
+            <br>
+            <a href="" class="btn btn-primary product-favourite" style="margin-top: 5px;">
                 {% include 'shop/include/favourite.html' %}
             </a>
             <input type="hidden" value="{{ product.id }}" class="prod_id">

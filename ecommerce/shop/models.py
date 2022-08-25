@@ -46,6 +46,7 @@ class Product(models.Model):
     selling_price = models.DecimalField(
         max_digits=8, decimal_places=2, default=0, verbose_name=_('Selling Price')
     )
+    quantity = models.PositiveIntegerField(default=0, verbose_name=_('Quantity'))
     view_count = models.PositiveIntegerField(default=0, verbose_name=_('View Count'))
     favourite = models.ManyToManyField(
         Customer,

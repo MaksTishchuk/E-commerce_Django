@@ -58,7 +58,7 @@ class Order(models.Model):
     cart = models.OneToOneField(Cart, on_delete=models.CASCADE, verbose_name=_('Cart'))
     ordered_by = models.CharField(max_length=200, verbose_name=_('Ordered by'))
     shipping_address = models.CharField(max_length=200, verbose_name=_('Address'))
-    phone = models.CharField(max_length=12, verbose_name=_('Phone'))
+    phone = models.CharField(max_length=20, verbose_name=_('Phone'))
     email = models.EmailField(null=True, blank=True, verbose_name=_('Email'))
     subtotal = models.PositiveIntegerField(verbose_name=_('Subtotal'))
     discount = models.PositiveIntegerField(verbose_name=_('Discount'))

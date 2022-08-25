@@ -17,7 +17,8 @@ class HomeView(CartMixin, ListView):
     template_name = 'home.html'
 
     def get_queryset(self):
-        return Product.objects.all().select_related('category').order_by('-view_count')[:8]
+        return Product.objects.filter(
+            quantity__gt=0).select_related('category').order_by('-view_count')[:8]
 
 
 class AllProductsView(CartMixin, ListView):
@@ -97,8 +98,8 @@ def add_favourite_product(request):
         favourite_count = product.get_favourite_count()
         return JsonResponse(
             {'html': render_to_string(
-                    'shop/include/favourite.html',
-                    {'customer_favourite': customer_favourite, 'favourite_count': favourite_count}
+                'shop/include/favourite.html',
+                {'customer_favourite': customer_favourite, 'favourite_count': favourite_count}
             )}
         )
 
