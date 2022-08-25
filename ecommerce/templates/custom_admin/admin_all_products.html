@@ -10,24 +10,31 @@
         <div class="col-md-12">
             <h3>{% trans "All Product list" %}</h3><hr>
             <a href="{% url 'custom-admin-add-product' %}" class="btn btn-primary">{% trans "Add New Product" %}</a>
-            <table class="table table-striped" style="margin-top: 15px;">
+            <table class="table table-striped" style="margin-top: 15px; text-align: center">
                 <thead>
                     <tr>
                         <th>№</th>
                         <th>{% trans "Product Title" %}</th>
                         <th>{% trans "Image" %}</th>
                         <th>{% trans "Price" %}</th>
+                        <th>{% trans "Quantity" %}</th>
                         <th>{% trans "Views" %}</th>
+                        <th>{% trans "Edit product" %}</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for product in all_products %}
                     <tr>
                         <td>{{ forloop.counter }}</td>
-                        <td>{{ product.title }}</td>
+                        <td style="text-align: left">{{ product.title }}</td>
                         <td><img src="{{ product.image.url }}" style="height: 60px;" alt=""></td>
                         <td>{{ product.selling_price }}</td>
+                        <td>{{ product.quantity }}</td>
                         <td>{{ product.view_count }}</td>
+                        <td>
+                            <a href="{% url 'custom-admin-edit-product' product.id %}" class="btn btn-primary">{% trans "Edit" %}</a>
+                            <a href="{% url 'custom-admin-delete-product' product.id %}" class="btn btn-danger">{% trans "Delete" %}</a>
+                        </td>
                     </tr>
                     {% endfor %}
                 </tbody>

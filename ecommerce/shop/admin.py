@@ -33,15 +33,15 @@ class ProductAdmin(TranslationAdmin):
 
     prepopulated_fields = {'slug': ('title',)}
     list_display = (
-        "id", "title", "category", "market_price", "selling_price", "created_at", "view_count",
+        "id", "title", "category", "market_price", "selling_price", "quantity", "view_count",
         "get_image"
     )
     list_display_links = ("id", "title",)
     list_filter = ('category',)
     search_fields = ('title', 'description',)
     fields = (
-        "category", "title", "slug", "description", "market_price", "selling_price", "created_at",
-        "warranty", "return_policy", "view_count", "image", "get_image",
+        "category", "title", "slug", "description", "market_price", "selling_price", "quantity",
+        "created_at", "warranty", "return_policy", "view_count", "image", "get_image",
     )
     readonly_fields = ('get_image', "created_at",)
     save_as = True
